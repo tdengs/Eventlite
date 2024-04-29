@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title layout:title-pattern="$LAYOUT_TITLE: $CONTENT_TITLE">EventLite</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/webjars/font-awesome/css/all.min.css" />
+</head>
+<body>
+  <br>
+  <div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#" placeholder="Events">Events</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="http://localhost:8080">Home</a>
+          </li>
+          <li class="nav-item active" >
+            <a class="nav-link" th:href="@{/events}">Events</a>
+          </li>
+          <li class="nav-item active" >
+            <a class="nav-link" th:href="@{/venues}" >Venues</a>
+          </li>
+          <li class="nav-item active" sec:authorize="isAuthenticated()" aria-hidden="true">
+            <a class="nav-link" href="/events/new">Create Event</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:method="get" th:action="@{/events/search}" th:object="${searchterm}">
+          <label for="term" >Search for Events:</label>
+          <input class="form-control" type="text" name="term" id="term" placeholder="e.g. Team Study">
+          <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </form>
+
+
+
+        <div class="nav-item dropdown" sec:authorize="!isAuthenticated()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sign in
+          </a>
+          <div class="dropdown-menu">
+            <form class="px-4 py-3"  th:action="@{/sign-in}" method="post">
+              <div>
+                <div class="form-group" th:classappend="${param.error}? has-error">
+                  <label for="username">User name:</label>
+                  <input class="form-control" type="text" name="username" id="username" autofocus="autofocus" />
+                </div>
+                <div class="form-group" th:classappend="${param.error}? has-error">
+                  <label for="password">Password:</label>
+                  <input class="form-control" type="password" name="password" id="password" autofocus="autofocus" />
+                </div>
+              </div>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Sign in</button>
+            </form>
+          </div>
+
+        </div>
+
+
+        <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span sec:authentication="name"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <form th:action="@{/sign-out}" method="post" >
+            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sign out</button>
+          </form>
+        </div>
+          </div>
+
+      </div>
+    </nav>
+
+    <div layout:fragment="content">
+      Main page body goes here...
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/popper.js/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

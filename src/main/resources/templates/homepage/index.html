@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>EventLite Home</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/webjars/font-awesome/css/all.min.css">
+</head>
+<body>
+<div class="container">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" placeholder="Home">Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link disabled" href="http://localhost:8080">Home</a>
+        </li>
+        <li class="nav-item active" >
+          <a class="nav-link active" th:href="@{/events}">Events</a>
+        </li>
+        <li class="nav-item active" >
+          <a class="nav-link" th:href="@{/venues}" >Venues</a>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0" th:method="get" th:action="@{/events/search}" th:object="${searchterm}">
+        <label for="term" >Search for Events:</label>
+        <input class="form-control" type="text" name="term" id="term" placeholder="e.g. Team Study">
+        <button class="btn btn-primary mr-2" type="submit">Search</button>
+      </form>
+
+
+
+      <div class="nav-item dropdown" sec:authorize="!isAuthenticated()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sign in
+        </a>
+        <div class="dropdown-menu">
+          <form class="px-4 py-3"  th:action="@{/sign-in}" method="post">
+            <div>
+              <div class="form-group" th:classappend="${param.error}? has-error">
+                <label for="username">User name:</label>
+                <input class="form-control" type="text" name="username" id="username" autofocus="autofocus" />
+              </div>
+              <div class="form-group" th:classappend="${param.error}? has-error">
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password" autofocus="autofocus" />
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Sign in</button>
+          </form>
+        </div>
+
+      </div>
+
+
+      <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span sec:authentication="name"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <form th:action="@{/sign-out}" method="post" >
+            <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sign out</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+  <div class="container">
+    <h2>Welcome to EventLite</h2>
+  <br>
+  <h3>Upcoming Events</h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><i class="fas fa-bolt"></i> Event</th>
+        <th><i class="fas fa-map-marker-alt"></i> Venue</th>
+        <th><i class="fas fa-calendar"></i> Date</th>
+        <th><i class="fas fa-clock"></i> Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="f : ${next3events}">
+        <td > 
+        <a th:href="@{/events/{num}(num=${f.id})}" th:text="${f.name}">My Event</a>
+        </td>
+        <td > 
+          <a th:href="@{/venues/{num}(num=${f.venue.id})}" th:text="${f.venue.name}">Event Venue</a>
+        </td>
+        <td th:text="${{f.date}}">Event date</td>
+        <td th:text="${{f.time}}">Event time</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+      <h3>Venues</h3>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i class="fas fa-bolt"></i> Venue</th>
+          <th><i class="fas fa-map-marker-alt"></i> Address</th>
+          <th><i class="fas fa-calendar"></i> Capacity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="v : ${next3venues}">
+          <td > 
+            <a th:href="@{/venues/{num}(num=${v.id})}" th:text="${v.name}">My Venue</a>
+            </td>
+          <td th:text="${{v.address}}">Venue Address</td>
+          <td th:text="${{v.capacity}}">Venue Capacity</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/popper.js/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultVenues}">
+<head>
+  <title>HI</title>
+</head>
+<body>
+  <div layout:fragment="content">
+    <h1>Update events</h1>
+
+    <form action="#" th:action="@{/venues/updateVenue}" th:object="${venue}"  method ="post">
+    
+    <div class="form-group" >
+    <input class="form-control" type="hidden" name="id" id="id" th:field = "*{id}" th:placeholder="${venue.id}" autofocus="autofocus"/>
+     
+     <p th:classappend="${#fields.hasErrors('name')}? has-error"</p >
+     <label for="name">Venue Name</label>
+     <input class="form-control" type="text" name="name" id="name" th:field = "*{name}" th:placeholder="${venue.name}" autofocus="autofocus" />
+     <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">errors</p >
+     
+     <p th:classappend="${#fields.hasErrors('capacity')}? has-error"</p >
+        <label for="time">Venue Capacity</label>
+        <input class="form-control" type="number" name="capacity" id="capacity" th:field = "*{capacity}" th:placeholder="${venue.capacity}" autofocus="autofocus" />
+        <p class="text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">errors</p >
+        
+        <p th:classappend="${#fields.hasErrors('address')}? has-error"</p >       
+        <label for="date">Venue address</label>
+        <input class="form-control" type="text" name="address" id="address" th:field = "*{address}" th:placeholder="${venue.address}" autofocus="autofocus" />
+        <p class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">errors</p >
+        
+    
+        
+       
+    
+    </ div>
+    
+    
+    
+    
+    
+    
+    
+      
+    
+      <button class="btn btn-primary" type="submit"><i class="fas fa-bookmark" aria-hidden="true"></i>Update</button>
+      <a class="btn btn-warning" role="button" href="/venues"><i class="fas fa-ban" aria-hidden="true"></i>Cancel</a>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultVenues}">
+<head>
+  <title>Search</title>
+</head>
+<body>
+  <div layout:fragment="content">
+    <h1>Search results</h1>
+
+	<h3>Venues</h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><i class="fas fa-bolt"></i> Venue</th>
+        <th><i class="fas fa-map-marker-alt"></i> Address</th>
+        <th><i class="fas fa-calendar"></i> Capacity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="v : ${venues}">
+        <td > 
+        <a th:href="@{/venues/{num}(num=${v.id})}" th:text="${v.name}">My Venue</a>
+        </td>
+        <td th:text="${{v.address}}">Venue Address</td>
+        <td th:text="${{v.capacity}}">Venue Capacity</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+    <form>
+      <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to all Venues</a>
+    </form>
+	
+  </div>
+
+</body>
+</html>

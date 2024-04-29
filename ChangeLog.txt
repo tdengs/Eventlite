@@ -1,0 +1,154 @@
+type new changes at the top
+Week 10
+- Security Had to add the paths that were authorised and those that where not.
+Integration Test
+Event
+-> Access new and update with or without user checked.
+changed show for events so that it now uses the controler for delete
+-> Update and add event push work. also test for incorrect info and correct respond
+Event Controller Integration testing the following:
+Show All events
+look for specific event
+look at none existing events
+update event with no user
+update event with user
+add event with no user
+add event with no user
+add event with no name
+add event with long name
+add event with past date
+add event with no date
+add event with to long description
+add event with no description
+add event with no time
+delete event with no user
+delete event with user
+
+Venues Integration test
+Show All venues
+Look At specific Venue
+Look at none existing Venue
+Update Venue with not user
+Update venue with User
+Add Venue with no user
+add venue with user
+add venue with no name
+add venue with to long a name
+add venue with no address
+add venue with invalid address
+add venue with no capacity
+delete venue with no user
+delete venue with user with no event
+delete venue with user with event
+delete no existing venue
+
+
+IntegrationApi Event test
+wrote test to access specifc event + updated security to allow it
+
+
+Event Test removed the delete all
+
+
+Week 7 Issue(30) get Lat and Long of venue by Max
+-> added method to venue service that changes the lat and long of venue using address
+-> changed update and new venue to use this method
+
+
+
+Week 6 Issue(22) show by Chai and Max
+-> Added show page for venues
+-> Added list of events at this venue
+-> Added hrefs for all appearances of venues
+-> Fixed back buttons
+
+Week6 Issue(26) search
+-> created search page for venues (search)
+
+Week6 Issue(21)
+-> created notfound and search pages for venues
+-> add way to view all venues (index)
+-> added exception handler for venues (not_found, VenuesController)
+
+
+Week6 Issue(25) by Ayman
+-> VenuesController: Added deleteVenue and deleteAllVenues methods
+-> VenuesControllerApi: Created VenuesControllerApi and added delete mapping methods
+-> VenueService: Added delete method placeholders
+-> VenueServiceImpl: Implemented delete methods
+
+Week5
+-> fixed back button on detail view not appearing when not logged in
+
+Week5 Issue(15)
+->EventsControllerTest : update tests for past and future searches
+->Events: added specifications and constraints for events input
+->EventController: added error handling for events update and adding
+->new.html: added error handling for inputs
+->update.html: added error handling for inputs
+
+Week5 Issue(14)
+-> Events: Events are now listed in an Upcoming and Past section and ordered by date and name
+-> Search: Results are displayed as being split into Upcoming and Past sections as above
+
+Week4 Issue(8) by Chaithanya Gowda
+-> Search: Users can now search the event by case insensitive substring
+
+Week4 Issue(9) By Max Burnell 
+-> Event attendee: View detailed event information on a separate event page (name, date, venue and description).
+
+Changed: 
+Initial dataLoader 
+	Added 2 more events and another venue in the event set up 
+	also included event descriptions 
+
+EventsControler 
+	implemented the getEvents function. 
+	
+	implemented newEvent function
+	
+	implemented createEvent function
+	
+EventsControlerApi
+	implemented newEvent function
+	
+	implemented createEvent function
+	
+EventsControlerTest
+	implemented newEvent function test
+	
+EventsControlerApiTest
+	implemented newEvent function test
+	
+EventService 
+	added the findById method. it takes long int 
+
+EventServiceImpl
+	implemented the findById method. 
+
+Event
+	Added this.description which has data type String. 
+	also added get and set methods for description 
+
+Index
+	Added a href around event name. calls on getEvents and that calls events/show 
+
+show 
+	created show.html to so a more detailed info of event. 
+	It uses the table from index to show venue, time and date 
+	Underneath table the event description is displayed. 
+	has a back button which returns to event list 
+	
+new
+	Created new.html to show the frontend of create page and 
+	made connections between eventController.java with newEvent and createEvent
+	and make a herf with the index page
+
+
+	
+
+website builds and tested. Works 
+Tests all Pass
+
+end of change 	
+	

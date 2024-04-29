@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultEvents}">
+<head>
+  <title>Search</title>
+</head>
+<body>
+  <div layout:fragment="content">
+    <h1>Search results</h1>
+    
+    
+
+    
+	
+
+	<h3>Upcoming Events</h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><i class="fas fa-bolt"></i> Event</th>
+        <th><i class="fas fa-map-marker-alt"></i> Venue</th>
+        <th><i class="fas fa-calendar"></i> Date</th>
+        <th><i class="fas fa-clock"></i> Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="f : ${future}">
+        <td > 
+        <a th:href="@{/events/{num}(num=${f.id})}" th:text="${f.name}">My Event</a>
+        </td>
+        <td > 
+          <a th:href="@{/venues/{num}(num=${f.venue.id})}" th:text="${f.venue.name}">Event Venue</a>
+          </td>
+        <td th:text="${{f.date}}">Event date</td>
+        <td th:text="${{f.time}}">Event time</td>
+
+      </tr>
+    </tbody>
+  </table>
+    	<h3> Past Events</h3>
+     
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i class="fas fa-bolt"></i> Event</th>
+          <th><i class="fas fa-map-marker-alt"></i> Venue</th>
+          <th><i class="fas fa-calendar"></i> Date</th>
+          <th><i class="fas fa-clock"></i> Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="p : ${past}">
+          <td > 
+          <a th:href="@{/events/{num}(num=${p.id})}" th:text="${p.name}">My Event</a>
+          </td>
+          <td > 
+            <a th:href="@{/venues/{num}(num=${p.venue.id})}" th:text="${p.venue.name}">Event Venue</a>
+            </td>
+          <td th:text="${{p.date}}">Event date</td>
+          <td th:text="${{p.time}}">Event time</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <form>
+      <a class="btn btn-primary" role="button" th:href="@{/events}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to all Events</a>
+    </form>
+	
+  </div>
+
+</body>
+</html>
